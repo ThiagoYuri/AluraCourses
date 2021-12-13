@@ -1,4 +1,4 @@
-{
+{  
   "name": "bytebank",
   "version": "1.0.0",
   "description": "Projeto do bytebank para seus clientes",
@@ -9,4 +9,5 @@
   "author": "Thiago Yuri",
   "license": "ISC",
   "type":"module"
+  
 }
