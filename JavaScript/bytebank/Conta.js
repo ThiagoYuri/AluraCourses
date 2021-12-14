@@ -1,7 +1,10 @@
-export class Conta{
+//Conta e uma classe abstrata
 
-    
+export class Conta{    
     constructor(saldoInicial,cliente,agencia){
+        if(this.constructor == Conta){
+            throw new Error("Você não pode instanciar a classe Conta pois ela e abstrata")
+        }
         this._saldo = saldoInicial;
         this._cliente = cliente;
         this._agencia = agencia;
