@@ -1,4 +1,6 @@
-﻿using FilmesAPI.Data;
+﻿using AutoMapper;
+using FilmesAPI.Data;
+using FilmesAPI.Data.DTOS;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,18 +15,20 @@ namespace FilmesAPI.Controllers
     public class FilmeController : Controller
     {
         private FilmeContext _context;
-
-        public FilmeController(FilmeContext context)
+        private IMapper _mapper;
+        public FilmeController(FilmeContext context,IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public IActionResult AdicionarFilme([FromBody]Filme filme)
+        public IActionResult AdicionarFilme([FromBody] CreateFilmeDto filmeDto)
         {
+            Filme filme = _mapper.Map<Filme>(filmeDto);
             _context.Add(filme);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperarFilmePorId), new { Id = filme.Id }, filme);
+            return CreatedAtAction(nameof(RecuperarFilmePorId), new { Id= filme.Id},filme);
         }
 
         [HttpGet]
@@ -40,7 +44,14 @@ namespace FilmesAPI.Controllers
             Filme filme = _context.Filmes.FirstOrDefault(x => x.Id == id);
             if(filme is not null)
             {
-                return Ok(filme);
+                return Ok(new
+                {
+                    Id = filme.Id,
+                    Titulo = filme.Titulo,
+                    Diretor = filme.Diretor,
+                    Duracao = filme.Duracao,
+                    HoraDaConsulta = DateTime.Now
+                }); ;
             }
             else
             {
@@ -49,7 +60,7 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizarFilme(int id, [FromBody]Filme filmeNovo)
+        public IActionResult AtualizarFilme(int id, [FromBody]UpdateFilmeDto filmeDto)
         {
             Filme filme = _context.Filmes.FirstOrDefault(x => x.Id == id);
             if(filme is null)
@@ -58,10 +69,7 @@ namespace FilmesAPI.Controllers
             }
             else
             {
-                filme.Titulo = filmeNovo.Titulo;
-                filme.Genero = filmeNovo.Genero;
-                filme.Diretor = filmeNovo.Diretor;
-                filme.Duracao = filmeNovo.Duracao;
+                _mapper.Map(filmeDto,filme);
                 _context.SaveChanges();
                 return NoContent();
             }
