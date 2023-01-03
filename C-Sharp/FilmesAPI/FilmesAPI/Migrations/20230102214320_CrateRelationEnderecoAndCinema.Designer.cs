@@ -3,14 +3,16 @@ using FilmesAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class FilmeContextModelSnapshot : ModelSnapshot
+    [Migration("20230102214320_CrateRelationEnderecoAndCinema")]
+    partial class CrateRelationEnderecoAndCinema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +27,13 @@ namespace FilmesAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("EnderecoFK")
+                        .HasColumnType("int");
+
                     b.Property<int>("EnderecoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GerenteFK")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")

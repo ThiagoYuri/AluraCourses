@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using FilmesAPI.Data;
-using FilmesAPI.Data.DTOS;
+using FilmesAPI.Data.Dtos;
 using FilmesAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,9 +14,9 @@ namespace FilmesAPI.Controllers
     [Route("[controller]")]
     public class FilmeController : Controller
     {
-        private FilmeContext _context;
+        private AppDbContext _context;
         private IMapper _mapper;
-        public FilmeController(FilmeContext context,IMapper mapper)
+        public FilmeController(AppDbContext context,IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -28,7 +28,7 @@ namespace FilmesAPI.Controllers
             Filme filme = _mapper.Map<Filme>(filmeDto);
             _context.Add(filme);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperarFilmePorId), new { Id= filme.Id},filme);
+            return CreatedAtAction(nameof(RecuperaFilmesPorId), new { Id= filme.Id},filme);
         }
 
         [HttpGet]
@@ -39,24 +39,16 @@ namespace FilmesAPI.Controllers
 
 
         [HttpGet("{id}")]
-        public IActionResult RecuperarFilmePorId(int id)
+        public IActionResult RecuperaFilmesPorId(int id)
         {
-            Filme filme = _context.Filmes.FirstOrDefault(x => x.Id == id);
-            if(filme is not null)
+            Filme filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+            if (filme != null)
             {
-                return Ok(new
-                {
-                    Id = filme.Id,
-                    Titulo = filme.Titulo,
-                    Diretor = filme.Diretor,
-                    Duracao = filme.Duracao,
-                    HoraDaConsulta = DateTime.Now
-                }); ;
+                ReadFilmeDto filmeDto = _mapper.Map<ReadFilmeDto>(filme);
+
+                return Ok(filmeDto);
             }
-            else
-            {
-                return NotFound();
-            }
+            return NotFound();
         }
 
         [HttpPut("{id}")]
