@@ -3,14 +3,16 @@ using FilmesAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class FilmeContextModelSnapshot : ModelSnapshot
+    [Migration("20230104123932_Add relation entry gerente and cinemas")]
+    partial class Addrelationentrygerenteandcinemas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,7 +121,7 @@ namespace FilmesAPI.Migrations
                     b.HasOne("FilmesAPI.Models.Gerente", "Gerente")
                         .WithMany("Cinemas")
                         .HasForeignKey("GerenteId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Endereco");
