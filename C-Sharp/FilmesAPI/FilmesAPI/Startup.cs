@@ -1,4 +1,5 @@
 using FilmesAPI.Data;
+using FilmesAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,11 @@ namespace FilmesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<FilmeServices, FilmeServices>();
+            services.AddScoped<CinemaServices, CinemaServices>();
+            services.AddScoped<EnderecoServices, EnderecoServices>();
+            services.AddScoped<SessaoServices, SessaoServices>();
+            services.AddScoped<GerenteServices, GerenteServices>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
