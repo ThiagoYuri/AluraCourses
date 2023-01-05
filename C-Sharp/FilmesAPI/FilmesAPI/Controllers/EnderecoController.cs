@@ -23,22 +23,22 @@ namespace FilmesAPI.Controllers
 
 
         [HttpPost]
-        public IActionResult AdicionaCinema([FromBody] CreateEnderecoDto enderecoDto)
+        public IActionResult AdicionaEndereco([FromBody] CreateEnderecoDto enderecoDto)
         {
             Endereco endereco = _mapper.Map<Endereco>(enderecoDto);
             _context.Enderecos.Add(endereco);
             _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperaCinemasPorId), new { Id = endereco.Id }, endereco);
+            return CreatedAtAction(nameof(RecuperaEnderecoPorId), new { Id = endereco.Id }, endereco);
         }
 
         [HttpGet]
-        public IEnumerable<Endereco> RecuperaCinemas([FromQuery] string nomeDoFilme)
+        public IEnumerable<Endereco> RecuperaEndereco([FromQuery] string nomeDoFilme)
         {
             return _context.Enderecos;
         }
 
         [HttpGet("{id}")]
-        public IActionResult RecuperaCinemasPorId(int id)
+        public IActionResult RecuperaEnderecoPorId(int id)
         {
             Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
             if (endereco != null)
@@ -50,7 +50,7 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizaCinema(int id, [FromBody] UpdateCinemaDto enderecoDto)
+        public IActionResult AtualizaEndereco(int id, [FromBody] UpdateCinemaDto enderecoDto)
         {
             Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
             if (endereco == null)
@@ -64,7 +64,7 @@ namespace FilmesAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeletaCinema(int id)
+        public IActionResult DeletaEndereco(int id)
         {
             Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
             if (endereco == null)

@@ -42,7 +42,7 @@ namespace FilmesAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletaFilme(int id)
+        public IActionResult DeletaGerente(int id)
         {
             Gerente gerente = _context.Gerentes.FirstOrDefault(x => x.Id == id);
             if (gerente is null)
