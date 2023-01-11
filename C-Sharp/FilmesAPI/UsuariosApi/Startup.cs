@@ -1,8 +1,7 @@
-using FilmesAPI.Data;
-using FilmesAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -14,8 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UsuariosApi.Data;
 
-namespace FilmesAPI
+namespace UsuariosApi
 {
     public class Startup
     {
@@ -29,18 +29,15 @@ namespace FilmesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDbContext>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<FilmeServices, FilmeServices>();
-            services.AddScoped<CinemaServices, CinemaServices>();
-            services.AddScoped<EnderecoServices, EnderecoServices>();
-            services.AddScoped<SessaoServices, SessaoServices>();
-            services.AddScoped<GerenteServices, GerenteServices>();
-            services.AddControllers();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "FilmesAPI", Version = "v1" });
-            //});
+            services.AddDbContext<UserDbContext>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddIdentity<IdentityUser<int>,IdentityRole<int>>()
+                .AddEntityFrameworkStores<UserDbContext>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UsuariosApi", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +47,7 @@ namespace FilmesAPI
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FilmesAPI v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UsuariosApi v1"));
             }
 
             app.UseHttpsRedirection();
