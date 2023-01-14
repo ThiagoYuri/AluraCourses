@@ -33,6 +33,7 @@ namespace UsuariosApi
             services.AddDbContext<UserDbContext>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser<int>,IdentityRole<int>>()
                 .AddEntityFrameworkStores<UserDbContext>();
+            services.AddScoped<LoginService, LoginService>();
             services.AddScoped<CadastroService, CadastroService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
