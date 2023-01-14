@@ -10,7 +10,8 @@ namespace UsuariosApi.Controlles
     public class LoginController : Controller
     {
         private LoginService _loginService;
-        public LoginController(LoginService loginService)
+
+        public LoginController(LoginService loginService )
         {
             _loginService = loginService;
         }
@@ -19,8 +20,8 @@ namespace UsuariosApi.Controlles
         public IActionResult LogarUsuario(LoginRequest loginRequest)
         {
             Result result = _loginService.LogaUsuario(loginRequest);
-            if(result.IsFailed) return Unauthorized();
-            return Ok();
+            if(result.IsFailed) return Unauthorized(result.Errors);
+            return Ok(result.Successes);
         }
     }
 }
