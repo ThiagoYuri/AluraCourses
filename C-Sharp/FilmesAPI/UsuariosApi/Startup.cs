@@ -31,12 +31,15 @@ namespace UsuariosApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<UserDbContext>(opt => opt.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser<int>,IdentityRole<int>>()
-                .AddEntityFrameworkStores<UserDbContext>();
+            services.AddIdentity<IdentityUser<int>,IdentityRole<int>>(
+                opt=> opt.SignIn.RequireConfirmedEmail = true)
+                .AddEntityFrameworkStores<UserDbContext>()
+                .AddDefaultTokenProviders();
             services.AddScoped<LoginService, LoginService>();
             services.AddScoped<CadastroService, CadastroService>();
             services.AddScoped<TokenService, TokenService>();
             services.AddScoped<LogoutService, LogoutService>();
+            services.AddScoped<EmailService, EmailService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             //services.AddSwaggerGen(c =>
