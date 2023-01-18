@@ -3,6 +3,7 @@ using MailKit.Net.Smtp;
 using Microsoft.Extensions.Configuration;
 using MimeKit;
 using System;
+using System.IO;
 using UsuariosApi.Models;
 
 namespace UsuariosApi.Services
@@ -37,7 +38,7 @@ namespace UsuariosApi.Services
                     client.AuthenticationMechanisms.Remove("XOUATH2");
                     client.Authenticate(
                         _configuration.GetValue<string>("EmailSettings:From"),
-                        _configuration.GetValue<string>("EmailSettings:Password")
+                        File.ReadAllText(@"C:\Users\thiag\Desktop\Programação\GitHub\TokenAPIEmail.txt")
                         );
                     client.Send(mensagemDeEmail);
                 }
