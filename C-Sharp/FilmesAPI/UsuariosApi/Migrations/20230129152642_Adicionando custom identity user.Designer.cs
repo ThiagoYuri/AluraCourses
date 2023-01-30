@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UsuariosApi.Data;
 
 namespace UsuariosApi.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230129152642_Adicionando custom identity user")]
+    partial class Adicionandocustomidentityuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,14 +53,14 @@ namespace UsuariosApi.Migrations
                         new
                         {
                             Id = 99999,
-                            ConcurrencyStamp = "8fe75c12-11b6-4e55-8d46-add5808163c4",
+                            ConcurrencyStamp = "6185fbaa-f430-4011-810a-39b3c579c461",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 99998,
-                            ConcurrencyStamp = "79b05605-e751-4e61-bba0-a558b1be6e44",
+                            ConcurrencyStamp = "27cd2be5-ebb1-42d4-8d35-e55023fcd5ab",
                             Name = "regular",
                             NormalizedName = "REGULAR"
                         });
@@ -246,16 +248,16 @@ namespace UsuariosApi.Migrations
                         {
                             Id = 99999,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "00ab19ff-bc71-4c1c-8b5e-3f3bc7768f60",
+                            ConcurrencyStamp = "4dc2e1a5-4332-4fbc-a8ca-673b059cce1b",
                             DateNascimento = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKNTqH0ZmrfSz6beExAem+r+0OCpdMZ6uEyhPdNyKIJI4JZX2JWyqf67CX/+dxUhjQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEALa1iqVgGWJQDs+XKQXh3DAeq9eniKzY5DaX9Oex2X6o9cv0Ir/PX9+/jNJvqRvyw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c3de0b7-2dab-4ca9-9a17-eefcfc9c596b",
+                            SecurityStamp = "bdfdb8bd-a81f-4b03-be83-bc3cbfbcaf52",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
