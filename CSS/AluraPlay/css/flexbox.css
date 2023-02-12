@@ -69,4 +69,21 @@
         justify-content: space-between;
     }
 
+    /*MENU*/
+    .menu__container{
+        position: fixed;
+        height: auto;
+        width: 74px;
+        top: 80px;
+    }
+
+    .menu__lista{
+        display: flex;  
+        width: 74px;
+        flex-direction: column;
+        padding-top: 15px;
+        gap: 33px;
+
+        justify-content: flex-start; 
+    }
 }
