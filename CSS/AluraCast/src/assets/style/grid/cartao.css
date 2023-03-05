@@ -1,6 +1,7 @@
 .secao-horizontal .cartao{
     display: grid;
     grid-template-columns: auto 1fr auto;
+    column-gap: 1.25rem;
 }
 
 .secao-horizontal .cartao__imagem{
@@ -14,4 +15,8 @@
 .secao-horizontal .cartao__botao{
     grid-column:  3/4;
     grid-row: 1/4;
+}
+
+.secao-horizontal .cartao__titulo{
+    align-self: end;
 }

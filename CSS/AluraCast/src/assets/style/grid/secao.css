@@ -1,5 +1,6 @@
 .secao{
     display: grid;
+    align-items: center;
 }
 
 .secao-horizontal{
