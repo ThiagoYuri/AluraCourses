@@ -10,6 +10,7 @@
         display: none;
     }
 
+    
     .navbar {
         display: block;
     }
@@ -19,6 +20,11 @@
         padding-right: 1rem;
     }
 
+    .secao-horizontal .cartao{
+        column-gap: 0.5rem;
+        display: grid;
+    }
+
     .secao-horizontal .cartao__imagem {
         height: 56px;
         width: 56px;
@@ -26,6 +32,8 @@
 
     .secao-horizontal .cartao__titulo {
         font: 700 14px/20px Open Sans, sans-serif;
+        grid-row: 2/2;
+        align-self: center;
     }
 
     .secao-vertical .cartao {
@@ -52,10 +60,10 @@
     .navbar {
         display: none;
     }
-
+    
     .menu-lateral {
         width: 213px;
-
+        display: grid;
     }
 
     .menu-lateral__link::before {
@@ -63,7 +71,7 @@
     }
 
     .secao-horizontal .cartao__titulo {
-        font: 700 16px/22px 'Open Sans', sans-serif;
+        font: 700 16px/22px 'Open Sans', sans-serif;        
     }
 
     .secao-horizontal .cartao__subtitulo {

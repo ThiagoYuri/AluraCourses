@@ -1,5 +1,4 @@
 .menu-lateral{
-    display: grid;
     grid-template-rows: repeat(3,auto) 1fr;
     row-gap: 2rem;
 }

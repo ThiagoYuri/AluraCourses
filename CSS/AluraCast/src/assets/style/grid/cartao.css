@@ -20,3 +20,9 @@
 .secao-horizontal .cartao__titulo{
     align-self: end;
 }
+
+
+.secao-vestical .cartao{
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
