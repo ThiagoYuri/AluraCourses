@@ -8,3 +8,5 @@
 - [JavaScript](https://github.com/ThiagoYuri/Alura/tree/main/JavaScript) - Projetos usando JavaScript
 
 - [Android](https://github.com/ThiagoYuri/Alura/tree/main/Android) - Projetos usando Android
+
+- [CSS](https://github.com/ThiagoYuri/Alura/tree/main/Android) - Projetos com foco no CSS
